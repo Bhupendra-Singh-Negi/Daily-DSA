@@ -1,0 +1,29 @@
+//https://leetcode.com/problems/string-to-integer-atoi/description/
+class Solution {
+    public long recur(String s,int i,long ans){
+        if(i==s.length() || !Character.isDigit(s.charAt(i))) return ans;
+        if(ans>Integer.MAX_VALUE) return ans;
+        ans=ans*10+Long.parseLong(s.charAt(i)+"");
+        
+        return recur(s,i+1,ans);
+    }
+    public int myAtoi(String s) {
+        s=s.trim();
+        char sign='+';
+        boolean flag=false;
+        if(s.length()>1&&(s.charAt(0)=='-' || s.charAt(0)=='+')) {
+            flag=true;
+            sign=s.charAt(0);
+            s=s.substring(1);
+            }
+        
+        long ans=recur(s,0,0);
+        if(flag){
+            if(sign=='-') ans*=-1;
+        }
+        if(ans>=Integer.MAX_VALUE) ans=Integer.MAX_VALUE;
+        if(ans<=Integer.MIN_VALUE) ans=Integer.MIN_VALUE;
+
+        return (int)ans;
+    }
+}
