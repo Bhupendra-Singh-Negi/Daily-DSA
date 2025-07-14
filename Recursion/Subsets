@@ -1,0 +1,19 @@
+//https://leetcode.com/problems/subsets/
+class Solution {
+    public void recur(List<List<Integer>> ans, List<Integer> list, int[] nums, int index){
+            List<Integer> temp=new ArrayList<>(list);
+            ans.add(temp);
+        for(int i=index;i<nums.length;i++){
+            temp.add(nums[i]);
+            recur(ans,temp,nums,i+1);
+            temp.remove(temp.size()-1);
+        }
+    }
+    public List<List<Integer>> subsets(int[] nums) {
+        List<List<Integer>> ans=new ArrayList<>();
+        List<Integer> list=new ArrayList<>();
+        // ans.add(list);
+        recur(ans,list,nums,0);
+        return ans;
+    }
+}
