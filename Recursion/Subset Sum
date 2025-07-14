@@ -1,0 +1,18 @@
+// https://www.geeksforgeeks.org/problems/subset-sums2234/1&selectedLang=python3
+class Solution {
+    public void recur(int[] arr, int sum, ArrayList<Integer> ans,int index){
+        ans.add(sum);
+        for(int i=index;i<arr.length;i++){
+            sum+=arr[i];
+            recur(arr,sum,ans,i+1);
+            sum-=arr[i];
+        }
+    }
+    public ArrayList<Integer> subsetSums(int[] arr) {
+        // code here
+        ArrayList<Integer> ans=new ArrayList<>();
+        int sum=0;
+        recur(arr,sum,ans,0);
+        return ans;
+    }
+}
