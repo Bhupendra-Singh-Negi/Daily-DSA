@@ -1,0 +1,32 @@
+// https://leetcode.com/problems/palindrome-partitioning/
+class Solution {
+    public boolean palindrom(String s, int l, int r){
+        while(l<r){
+            if(s.charAt(l)!=s.charAt(r)) return false;
+            l++;
+            r--;
+        }
+        return true;
+    }
+    public void recur(int index, String s, List<List<String>> ans, List<String> list){
+        if(index==s.length()){
+            ans.add(new ArrayList<>(list));
+            return ;
+        }
+
+        for(int i=index;i<s.length();i++){
+            if(palindrom(s,index,i)){
+                list.add(s.substring(index,i+1));
+                recur(i+1,s,ans,list);
+                list.remove(list.size()-1);
+            }
+        }
+
+
+    }
+    public List<List<String>> partition(String s) {
+        List<List<String>> ans=new ArrayList<>();
+        recur(0,s,ans,new ArrayList<>());
+        return ans;
+    }
+}
