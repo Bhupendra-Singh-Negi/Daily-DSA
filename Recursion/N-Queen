@@ -1,0 +1,42 @@
+class Solution {
+    public List<String> construct(char[][] board){
+        List<String> ans=new ArrayList<>();
+        for(int i=0;i<board.length;i++){
+            String row=new String(board[i]);
+            ans.add(row);
+        }
+        return ans;
+    }
+    public void recur(int[] upperLeft,int[] lowerLeft, int[] left, int col, int n, char[][] board, List<List<String>> ans){
+        if(col==n){
+           ans.add(construct(board));
+           return; 
+        }
+        for(int row=0;row<board.length;row++){
+            if(left[row]==0&&lowerLeft[row+col]==0&&upperLeft[n-1-row+col]==0){
+                left[row]=1;
+                lowerLeft[row+col]=1;
+                upperLeft[n-1+col-row]=1;
+                board[row][col]='Q';
+                recur(upperLeft,lowerLeft,left,col+1,n,board,ans);
+                left[row]=0;
+                lowerLeft[row+col]=0;
+                upperLeft[n-1+col-row]=0;
+                board[row][col]='.';
+            }
+        }
+    }
+    public List<List<String>> solveNQueens(int n) {
+        List<List<String>> ans=new ArrayList<>();
+        char board[][]=new char[n][n];
+        for(int i=0;i<n;i++){
+         Arrays.fill(board[i],'.');
+        }
+        int[] upperLeft=new int[2*n-1];
+        int[] lowerLeft=new int[2*n-1];
+        int[] left=new int[n];
+
+        recur(upperLeft,lowerLeft,left,0,n,board,ans);
+        return ans;
+    }
+}
