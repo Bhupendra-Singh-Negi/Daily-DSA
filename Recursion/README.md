@@ -5,3 +5,5 @@
 
 Rat in a Maze Problem - I: https://www.geeksforgeeks.org/problems/rat-in-a-maze-problem/1
 
+Word break: https://leetcode.com/problems/word-break/
+
